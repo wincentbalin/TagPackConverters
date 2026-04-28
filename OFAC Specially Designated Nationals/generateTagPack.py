@@ -1,8 +1,7 @@
 import re
-import json
-import yaml
 import datetime
 import requests
+import yaml
 
 ALIASES = {"XBT": "BTC"}
 
@@ -17,8 +16,8 @@ REGEX = {"BTC": r"\b([13][a-km-zA-HJ-NP-Z1-9]{25,34})|bc(0([ac-hj-np-z02-9]{39}|
 class Convert:
     @staticmethod
     def load_config():
-        with open("config.json", "r") as json_data_file:
-            config = json.load(json_data_file)
+        with open("config.yaml", "r") as yaml_data_file:
+            config = yaml.safe_load(yaml_data_file)
         return config
 
     @staticmethod
