@@ -7,14 +7,14 @@ from typing import Union
 import requests
 import yaml
 
-ALIASES = {"XBT": "BTC", "TRX": "USDT"}
+ALIASES = {'XBT': 'BTC', 'TRX': 'USDT'}
 
-REGEX = {"XBT": r"\b([13][a-km-zA-HJ-NP-Z1-9]{25,34})|bc(0([ac-hj-np-z02-9]{39}|[ac-hj-np-z02-9]{59})|1[ac-hj-np-z02-9]{8,87})\b",
-         "BCH": r"\b(((?:bitcoincash|bchtest):)?([13][0-9a-zA-Z]{33}))|(((?:bitcoincash|bchtest):)?(qp)?[0-9a-zA-Z]{40})\b",
-         "LTC": r"\b([LM3][a-km-zA-HJ-NP-Z1-9]{25,33})\b",
-         "ZEC": r"\b([tz][13][a-km-zA-HJ-NP-Z1-9]{33})\b",
-         "ETH": r"\b((0x)?[0-9a-fA-F]{40})\b",
-         "TRX": r"\b(?:T[A-Za-z1-9]{33}|0x[0-9a-fA-F]{40})\b"}
+REGEX = {'XBT': r'\b([13][a-km-zA-HJ-NP-Z1-9]{25,34})|bc(0([ac-hj-np-z02-9]{39}|[ac-hj-np-z02-9]{59})|1[ac-hj-np-z02-9]{8,87})\b',
+         'BCH': r'\b(((?:bitcoincash|bchtest):)?([13][0-9a-zA-Z]{33}))|(((?:bitcoincash|bchtest):)?(qp)?[0-9a-zA-Z]{40})\b',
+         'LTC': r'\b([LM3][a-km-zA-HJ-NP-Z1-9]{25,33})\b',
+         'ZEC': r'\b([tz][13][a-km-zA-HJ-NP-Z1-9]{33})\b',
+         'ETH': r'\b((0x)?[0-9a-fA-F]{40})\b',
+         'TRX': r'\b(?:T[A-Za-z1-9]{33}|0x[0-9a-fA-F]{40})\b'}
 
 for c1, c2 in ALIASES.items():
     REGEX[c2] = REGEX[c1]
@@ -27,8 +27,8 @@ def find_currency(address: str) -> Union[str, None]:
 
 
 NS = {
-    "schema": "http://www.w3.org/2001/XMLSchema-instance",
-    "sdn": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/XML"
+    'schema': 'http://www.w3.org/2001/XMLSchema-instance',
+    'sdn': 'https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/XML'
 }
 
 
@@ -45,13 +45,13 @@ class RawData:
     def download(self):
         with requests.get(self.url, allow_redirects=True, verify=False) as source:
             source.raise_for_status()
-            with open(self.fn, "wb") as fout:
+            with open(self.fn, 'wb') as fout:
                 fout.write(source.content)
             self.tree = ET.fromstring(source.text)
 
     def get_date(self) -> str:
         pd = self.tree.find('./sdn:publshInformation/sdn:Publish_Date', NS)
-        return datetime.datetime.strptime(pd.text, "%m/%d/%Y").date().isoformat()
+        return datetime.datetime.strptime(pd.text, '%m/%d/%Y').date().isoformat()
 
     def get_tree(self) -> ET.ElementTree:
         return self.tree
@@ -142,7 +142,7 @@ class TagPackGenerator:
             f.write(yaml.dump(self.data, sort_keys=False))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     with open('config.yaml', 'r') as config_file:
         config = yaml.safe_load(config_file)
 
