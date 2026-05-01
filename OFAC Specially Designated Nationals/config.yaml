@@ -1,5 +1,7 @@
-category: user
-creator: INTERPOL CNTL
-label: Asset listed under US Treasury OFAC Sanctions List
-source: https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.XML
-title: US Treasury OFAC Sanctions List
+CATEGORY: user
+CREATOR: INTERPOL CNTL
+LABEL: Asset listed under US Treasury OFAC Sanctions List
+URL: https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.XML
+TITLE: US Treasury OFAC Sanctions List
+RAW_FILE_NAME: sdn.xml
+TAGPACK_FILE_NAME: OFAC_tagpack.yaml
