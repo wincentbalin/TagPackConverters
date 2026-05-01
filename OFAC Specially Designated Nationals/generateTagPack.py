@@ -40,7 +40,7 @@ class RawData:
     def __init__(self, fn: str, url: str):
         self.fn = fn
         self.url = url
-        self.tree = ET.parse(self.fn) if os.path.exists(self.fn) else ET.fromstring('')
+        self.tree = ET.parse(self.fn) if os.path.exists(self.fn) else None
 
     def download(self):
         with requests.get(self.url, allow_redirects=True, verify=False) as source:
