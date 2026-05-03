@@ -2,6 +2,7 @@
 *.jsonl
 *.csv
 *.yaml
+sdn.xml
 
 !config.json
 !config.yaml
