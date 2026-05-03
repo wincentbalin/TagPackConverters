@@ -133,6 +133,14 @@ class TagPackGenerator:
             remarks = sdn_entry.find('./sdn:remarks', NS)
             if remarks is not None:
                 label = f'{label} {remarks.text}'
+            if sdn_entry.find('./sdn:programList', NS):
+                program_list = []
+                for program in sdn_entry.findall('./sdn:programList/sdn:program', NS):
+                    program_list.append(program.text)
+                if len(program_list) == 1:
+                    label = f'{label}; Program: {program_list[0]}'
+                elif len(program_list) > 1:
+                    label = f'{label}; Programs: {", ".join(program_list)}'
             for currency, address in validated_addresses:
                 tags.append({'label': label, 'currency': currency, 'address': address})
             self.data['tags'] = tags
